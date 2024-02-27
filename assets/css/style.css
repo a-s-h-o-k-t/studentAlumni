@@ -1102,3 +1102,8 @@ body{
       position: sticky;
       top: 0;
 }
+
+.form-label{
+  font-weight: 600;
+  color: #1e4356;
+}
