@@ -1069,3 +1069,36 @@ body{
   color: #a2cce3;
 }
 
+/* -----------regis form css------------ */
+
+.main-content-layout {
+    display: flex;
+    height:100vh;
+    justify-content: center;
+    overflow: auto;
+}
+
+.content-wrapper {
+  flex: 1;
+  max-width: 1440px;
+  overflow: auto;
+}
+
+.dropdown-toggle::after{
+  display: none;
+}
+
+.content-header{
+      height: 80px;
+      transition: all 0.5s;
+      z-index: 997;
+      transition: all 0.5s;
+      background: #1e4356;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 20px;
+      gap: 30px;
+      position: sticky;
+      top: 0;
+}
