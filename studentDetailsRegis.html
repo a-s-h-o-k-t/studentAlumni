@@ -36,6 +36,7 @@
 
     <!--  Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/font.css" />
   </head>
 
   <body>
@@ -70,25 +71,411 @@
               </li>
             </ul>
           </div>
-          <span class="text-light fs-2"><span>Student Details</span></span>
+          <span class="text-light fs-2"><span>Student Name</span></span>
         </div>
         <!-- End Header -->
 
         <div
-          class="border border-3 border border-2 p-2 m-5 d-flex flex-column overflow-auto">
+          class="border border-3 border border-2 p-4 m-4 d-flex flex-column overflow-auto">
           <form class="row g-3 needs-validation" novalidate>
             <div class="col-lg-6">
               <label for="studentNameInput" class="form-label"
                 >Student Name</label
               >
               <input class="form-control" id="studentNameInput" required />
-              <div class="invalid-feedback">Please enter a valid name.</div>
+              <div class="invalid-feedback">Please enter your name.</div>
             </div>
             <div class="col-lg-6">
               <label for="departNameInput" class="form-label">Department</label>
               <input class="form-control" id="departNameInput" required />
               <div class="invalid-feedback">
-                Please enter a your department name.
+                Please enter a department name.
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <label for="dOBInput" class="form-label">Date of birth</label>
+              <input class="form-control" id="dOBInput" type="date" required />
+              <!-- min="2000-01-01"
+                          max="2023-12-31" -->
+              <div class="invalid-feedback">
+                Please enter your date of birth.
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <label for="yearOfJoiningInput" class="form-label"
+                >Year of joining</label
+              >
+              <input
+                class="form-control"
+                id="yearOfJoiningInput"
+                type="number"
+                required />
+              <!-- max="2020" -->
+              <div class="invalid-feedback">
+                Please enter your year of joining.
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <label for="yearOfPassingInput" class="form-label"
+                >Year of passing</label
+              >
+              <input
+                class="form-control"
+                id="yearOfPassingInput"
+                type="number"
+                required />
+              <!-- max="2023" -->
+              <div class="invalid-feedback">
+                Please enter your year of passing.
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <label for="admissionNoInput" class="form-label"
+                >Admission no.</label
+              >
+              <input class="form-control" id="admissionNoInput" required />
+              <div class="invalid-feedback">
+                Please enter your admission number.
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <label for="aadharInput" class="form-label">Aadhar Number</label>
+              <input class="form-control" id="aadharInput" required />
+              <div class="invalid-feedback">
+                Please enter your aadhar number.
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <label for="mobileNoInput" class="form-label"
+                >Mobile Number</label
+              >
+              <input class="form-control" id="mobileNoInput" required />
+              <div class="invalid-feedback">
+                Please enter your Mobile number.
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <label for="bloodGroupInput" class="form-label"
+                >Blood Group</label
+              >
+              <input class="form-control" id="bloodGroupInput" required />
+              <div class="invalid-feedback">Please enter your blood group.</div>
+            </div>
+            <div class="col-12">
+              <label class="form-label"
+                >Do students come under any special category?</label
+              >
+              <div class="col-lg-6">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="specialCategoryInput"
+                    id="exServiveManDaughter"
+                    value="Ex Service Man Daughter"
+                    required />
+                  <label class="form-check-label" for="exServiveManDaughter">
+                    Ex Service Man Daughter
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="specialCategoryInput"
+                    id="sportsQuota"
+                    value="Sports Quota"
+                    required />
+                  <label class="form-check-label" for="sportsQuota">
+                    Sports Quota
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="specialCategoryInput"
+                    id="physicallyChallenged"
+                    value="Physically challenged"
+                    required />
+                  <label class="form-check-label" for="physicallyChallenged">
+                    Physically challenged
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="specialCategoryInput"
+                    id="others"
+                    value="Others"
+                    required />
+                  <label class="form-check-label" for="others"> Others </label>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <label class="form-label"
+                >Do students receive any scholarships from below?</label
+              >
+              <div class="col-lg-6">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="scholarshipsInput"
+                    id="minority"
+                    value="Minority"
+                    required />
+                  <label class="form-check-label" for="minority">
+                    Minority
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="scholarshipsInput"
+                    id="uzhavar"
+                    value="Uzhavar"
+                    required />
+                  <label class="form-check-label" for="uzhavar">
+                    Uzhavar
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="scholarshipsInput"
+                    id="moovalur"
+                    value="Moovalur"
+                    required />
+                  <label class="form-check-label" for="moovalur">
+                    Moovalur
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="scholarshipsInput"
+                    id="beediScholarship"
+                    value="Beedi scholarship"
+                    required />
+                  <label class="form-check-label" for="beediScholarship">
+                    Beedi scholarship
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <label class="form-label"
+                >Are you the first person in your family to graduate from
+                college?</label
+              >
+              <div class="col-lg-6">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="firstGraduateInput"
+                    id="yes"
+                    value="Yes"
+                    required />
+                  <label class="form-check-label" for="yes"> Yes </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="firstGraduateInput"
+                    id="no"
+                    value="No"
+                    required />
+                  <label class="form-check-label" for="no"> No </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- address details -->
+            <label class="form-label">Address Details:</label>
+            <div class="col-lg-6">
+              <label for="addressLine1Input" class="form-label"
+                >Address Line1</label
+              >
+              <input class="form-control" id="addressLine1Input" required />
+              <div class="invalid-feedback">
+                Please enter your streetno/village/block.
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <label for="addressLine2Input" class="form-label"
+                >Address Line2</label
+              >
+              <input class="form-control" id="addressLine2Input" required />
+              <div class="invalid-feedback">
+                Please enter your locality/panchayat/municipal.
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <label for="districtInput" class="form-label">District</label>
+              <input class="form-control" id="districtInput" required />
+              <div class="invalid-feedback">Please enter your district.</div>
+            </div>
+            <div class="col-lg-6">
+              <label for="stateInput" class="form-label">State</label>
+              <input class="form-control" id="stateInput" required />
+              <div class="invalid-feedback">Please enter your state.</div>
+            </div>
+            <div class="col-lg-12">
+              <div class="col-lg-6">
+                <label for="pincodeInput" class="form-label">Pincode</label>
+                <input
+                  class="form-control"
+                  id="pincodeInput"
+                  pattern="[0-9]{6}"
+                  required />
+                <div class="invalid-feedback">
+                  Please enter your valid 6-digit zipcode/pincode.
+                </div>
+              </div>
+            </div>
+
+            <!-- extra course details -->
+            <div class="col-lg-6">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="isExtraCourseInput" />
+                <label class="form-check-label" for="isExtraCourseInput">
+                  Have you attending any extra courses?
+                </label>
+              </div>
+            </div>
+            <div class="col-lg-8" id="extra-course-container">
+              <label class="form-label" for="extraCourseDetailInput"
+                >Extra Course Details:</label
+              >
+              <textarea
+                class="form-control"
+                id="extraCourseDetailInput"
+                placeholder="Enter here"
+                rows="4"
+                required></textarea>
+              <div class="invalid-feedback">
+                Please enter a details about your extra courses.
+              </div>
+            </div>
+
+            <!-- Internship Detail -->
+            <div class="col-lg-8">
+              <label class="form-label" for="intershipInput"
+                >Internship Details:</label
+              >
+              <textarea
+                class="form-control"
+                id="intershipInput"
+                placeholder="Enter here"
+                rows="4"
+                required></textarea>
+              <div class="invalid-feedback">
+                Please enter a details about your Internship.
+              </div>
+            </div>
+
+            <!-- Student Mark Percentage -->
+            <label class="form-label">Student Mark Percentage:</label>
+            <div class="row col-lg-12">
+              <div class="col-lg-2">
+                <label for="sem1Input" class="form-label">SEM 1</label>
+                <input
+                  class="form-control"
+                  id="sem1Input"
+                  pattern="[0-9]{2,3}"
+                  required />
+              </div>
+              <div class="col-lg-2">
+                <label for="sem2Input" class="form-label">SEM 2</label>
+                <input
+                  class="form-control"
+                  id="sem2Input"
+                  pattern="[0-9]{2,3}"
+                  required />
+              </div>
+              <div class="col-lg-2">
+                <label for="sem3Input" class="form-label">SEM 3</label>
+                <input
+                  class="form-control"
+                  id="sem3Input"
+                  pattern="[0-9]{2,3}"
+                  required />
+              </div>
+              <div class="col-lg-2">
+                <label for="sem4Input" class="form-label">SEM 4</label>
+                <input
+                  class="form-control"
+                  id="sem4Input"
+                  pattern="[0-9]{2,3}"
+                  required />
+              </div>
+              <div class="col-lg-2">
+                <label for="sem5Input" class="form-label">SEM 5</label>
+                <input
+                  class="form-control"
+                  id="sem5Input"
+                  pattern="[0-9]{2,3}"
+                  required />
+              </div>
+              <div class="col-lg-2">
+                <label for="sem6Input" class="form-label">SEM 6</label>
+                <input
+                  class="form-control"
+                  id="sem6Input"
+                  pattern="[0-9]{2,3}"
+                  required />
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="isHigherEducationInput" />
+                <label class="form-check-label" for="isHigherEducationInput">
+                  Have you registered for any higher education?
+                </label>
+              </div>
+            </div>
+            <div class="col-lg-8" id="higher-education-container">
+              <label class="form-label" for="higherEducationDetailInput"
+                >Higher Education Details:</label
+              >
+              <textarea
+                class="form-control"
+                id="higherEducationDetailInput"
+                placeholder="Enter here"
+                rows="2"
+                required></textarea>
+              <div class="invalid-feedback">
+                Please enter a details about your higher education.
+              </div>
+            </div>
+
+            <div class="col-lg-8">
+              <label class="form-label" for="employementInput"
+                >Employement Details:</label
+              >
+              <textarea
+                class="form-control"
+                id="employementInput"
+                placeholder="Enter here"
+                rows="2"
+                required></textarea>
+              <div class="invalid-feedback">
+                Please enter a details about your employement details.
               </div>
             </div>
 
@@ -110,9 +497,41 @@
     </main>
     <!-- End #main -->
     <script>
+      const getStudentDetails = async () => {};
+      // var selectedOption = document.querySelector('input[name="option"]:checked');
+
       (function () {
         "use strict";
         let form = document.querySelector(".needs-validation");
+        let extraCourseInput = document.getElementById("isExtraCourseInput");
+        let isHigherEdu = document.getElementById("isHigherEducationInput");
+
+        document.getElementById("extra-course-container").style.display =
+          "none";
+        document.getElementById("higher-education-container").style.display =
+          "none";
+
+        extraCourseInput.addEventListener("change", (event) => {
+          if (event.target.checked) {
+            document.getElementById("extra-course-container").style.display =
+              "initial";
+          } else {
+            document.getElementById("extra-course-container").style.display =
+              "none";
+          }
+        });
+
+        isHigherEdu.addEventListener("change", (event) => {
+          if (event.target.checked) {
+            document.getElementById(
+              "higher-education-container"
+            ).style.display = "initial";
+          } else {
+            document.getElementById(
+              "higher-education-container"
+            ).style.display = "none";
+          }
+        });
 
         form.addEventListener(
           "submit",
@@ -127,6 +546,10 @@
           },
           false
         );
+
+        // window.addEventListener("beforeunload", function (e) {
+        //   e.preventDefault();
+        // });
       })();
     </script>
   </body>

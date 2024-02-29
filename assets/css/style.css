@@ -1107,3 +1107,13 @@ body{
   font-weight: 600;
   color: #1e4356;
 }
+
+.was-validated{
+  .form-check-input:valid~.form-check-label {
+      color: inherit;
+  }
+  .form-control:valid,.form-control:valid:focus,.form-check-input:valid {
+      border-color: #86b7fe;
+      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, .25);
+  }
+}
