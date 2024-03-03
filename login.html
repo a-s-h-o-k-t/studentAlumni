@@ -1,24 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="assets/css/style2.css">
-    </head>
+</head>
+
 <body>
+    <script src="assets/js/utils.js"></script>
     <div class="form-container">
 
-        <form action="login.php" method="post" enctype="multipart/form-data">
-           <h3>Login now</h3>
-           <input type="email" name="email" placeholder="Enter email" class="box" required>
-           <input type="password" name="password" placeholder="Enter password" class="box" required>
-           <input type="submit" name="submit" value="Login now" class="btn">
-           <p>Don't have an account? <a href="register.html">Regiser now</a></p>
+        <form onsubmit="submitForm(event)">
+            <h3>Login now</h3>
+            <input type="email" id="email" placeholder="Enter email" class="box" required>
+            <input type="password" id="password" pattern="[0-9@#$*A-Za-z]{8,}" placeholder="Enter password"
+                title="Password must be at least 8 characters long" class="box" required>
+            <input type="submit" name="submit" value="Login now" class="btn">
+            <div id="alreadyLoggedIn">
+                <h4>OR</h4>
+                <a href="#" id="loginAs">Login as </a>
+            </div>
+            <p>Don't have an account? <a href="register.html">Regiser now</a></p>
         </form>
-     
-     </div>
-     
-     </body>
-     </html>  
+    </div>
+
+    <script>
+        "use strict";
+        let isAlreadyLogInEl = document.getElementById('alreadyLoggedIn');
+        isAlreadyLogInEl.style.display = 'none';
+
+        const fetchUserData = async () => {
+            const getJwtToken = localStorage.getItem("jwttoken");
+            const getUserId = localStorage.getItem("userId");
+            if (getJwtToken && getUserId) {
+                const getUserRes = await fetch('http://localhost:5000/api/admin/getByIdPerson/' + getUserId, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                if (!getUserRes.ok) {
+                    return alert('Failed to fetch already loggedIn user');
+                }
+                const response = await getUserRes.json();
+                if (response.code == 200) {
+                    isAlreadyLogInEl.style.display = 'initial';
+                    document.getElementById('loginAs').innerText = document.getElementById('loginAs').innerText + ' ' + response.data[0].user_name
+                    document.getElementById('loginAs').setAttribute('href', 'studentDetailsRegis.html?id=' + response.data[0].id)
+                }
+            }
+        }
+        fetchUserData();
+
+        const submitForm = async (event) => {
+            try {
+                event.preventDefault();
+
+                let emailVal = document.getElementById('email').value;
+                let passwordVal = document.getElementById('password').value;
+
+                let postData = {
+                    password: passwordVal,
+                    email: emailVal
+                };
+
+                const loginUserRes = await fetch('http://localhost:5000/api/admin/personLogin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(postData)
+                });
+                if (!loginUserRes.ok) {
+                    return alert('Failed: Something went wrong');
+                }
+                const response = await loginUserRes.json();
+
+                if (response.code == 200) {
+                    localStorage.setItem("jwttoken", response?.token);
+                    localStorage.setItem("userId", response.data[0].id);
+                    alert('LoggedIn succesfully')
+                    window.location.href = 'studentDetailsRegis.html?id=' + response.data[0].id;
+                    window.location.replace('studentDetailsRegis.html?id=' + response.data[0].id)
+                } else {
+                    alert(response.message);
+                }
+            } catch (err) {
+                alert(err.message)
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
 </body>

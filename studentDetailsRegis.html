@@ -46,6 +46,8 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"></script>
 
+    <script src="assets/js/utils.js"></script>
+
     <main class="main-content-layout">
       <div class="content-wrapper shadow bg-light">
         <!-- ======= Header ======= -->
@@ -60,18 +62,20 @@
             </span>
             <ul class="dropdown-menu">
               <li>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="#" id="editProfileBtn">
                   <i class="bi bi-pencil-square"></i> Edit Profile</a
                 >
               </li>
               <li>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item">
                   <i class="bi bi-box-arrow-left"></i> Logout</a
                 >
               </li>
             </ul>
           </div>
-          <span class="text-light fs-2"><span>Student Name</span></span>
+          <span class="text-light fs-2"
+            ><span id="userNameEl">Student Name</span></span
+          >
         </div>
         <!-- End Header -->
 
@@ -82,12 +86,20 @@
               <label for="studentNameInput" class="form-label"
                 >Student Name</label
               >
-              <input class="form-control" id="studentNameInput" required />
+              <input
+                class="form-control"
+                id="studentNameInput"
+                name="user_name"
+                required />
               <div class="invalid-feedback">Please enter your name.</div>
             </div>
             <div class="col-lg-6">
               <label for="departNameInput" class="form-label">Department</label>
-              <input class="form-control" id="departNameInput" required />
+              <input
+                class="form-control"
+                id="departNameInput"
+                name="department"
+                required />
               <div class="invalid-feedback">
                 Please enter a department name.
               </div>
@@ -95,7 +107,12 @@
 
             <div class="col-lg-6">
               <label for="dOBInput" class="form-label">Date of birth</label>
-              <input class="form-control" id="dOBInput" type="date" required />
+              <input
+                class="form-control"
+                id="dOBInput"
+                name="dob"
+                type="date"
+                required />
               <!-- min="2000-01-01"
                           max="2023-12-31" -->
               <div class="invalid-feedback">
@@ -109,6 +126,7 @@
               <input
                 class="form-control"
                 id="yearOfJoiningInput"
+                name="year_join"
                 type="number"
                 required />
               <!-- max="2020" -->
@@ -124,6 +142,7 @@
                 class="form-control"
                 id="yearOfPassingInput"
                 type="number"
+                name="year_pass"
                 required />
               <!-- max="2023" -->
               <div class="invalid-feedback">
@@ -134,14 +153,22 @@
               <label for="admissionNoInput" class="form-label"
                 >Admission no.</label
               >
-              <input class="form-control" id="admissionNoInput" required />
+              <input
+                class="form-control"
+                name="admission_no"
+                id="admissionNoInput"
+                required />
               <div class="invalid-feedback">
                 Please enter your admission number.
               </div>
             </div>
             <div class="col-lg-6">
               <label for="aadharInput" class="form-label">Aadhar Number</label>
-              <input class="form-control" id="aadharInput" required />
+              <input
+                class="form-control"
+                name="aadhar_card"
+                id="aadharInput"
+                required />
               <div class="invalid-feedback">
                 Please enter your aadhar number.
               </div>
@@ -150,7 +177,11 @@
               <label for="mobileNoInput" class="form-label"
                 >Mobile Number</label
               >
-              <input class="form-control" id="mobileNoInput" required />
+              <input
+                class="form-control"
+                name="mobile_number"
+                id="mobileNoInput"
+                required />
               <div class="invalid-feedback">
                 Please enter your Mobile number.
               </div>
@@ -159,7 +190,11 @@
               <label for="bloodGroupInput" class="form-label"
                 >Blood Group</label
               >
-              <input class="form-control" id="bloodGroupInput" required />
+              <input
+                class="form-control"
+                id="bloodGroupInput"
+                name="blood_group"
+                required />
               <div class="invalid-feedback">Please enter your blood group.</div>
             </div>
             <div class="col-12">
@@ -171,7 +206,7 @@
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="specialCategoryInput"
+                    name="special_category"
                     id="exServiveManDaughter"
                     value="Ex Service Man Daughter"
                     required />
@@ -183,7 +218,7 @@
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="specialCategoryInput"
+                    name="special_category"
                     id="sportsQuota"
                     value="Sports Quota"
                     required />
@@ -195,7 +230,7 @@
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="specialCategoryInput"
+                    name="special_category"
                     id="physicallyChallenged"
                     value="Physically challenged"
                     required />
@@ -207,7 +242,7 @@
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="specialCategoryInput"
+                    name="special_category"
                     id="others"
                     value="Others"
                     required />
@@ -224,7 +259,7 @@
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="scholarshipsInput"
+                    name="scholarship"
                     id="minority"
                     value="Minority"
                     required />
@@ -236,7 +271,7 @@
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="scholarshipsInput"
+                    name="scholarship"
                     id="uzhavar"
                     value="Uzhavar"
                     required />
@@ -248,7 +283,7 @@
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="scholarshipsInput"
+                    name="scholarship"
                     id="moovalur"
                     value="Moovalur"
                     required />
@@ -260,7 +295,7 @@
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="scholarshipsInput"
+                    name="scholarship"
                     id="beediScholarship"
                     value="Beedi scholarship"
                     required />
@@ -280,21 +315,21 @@
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="firstGraduateInput"
-                    id="yes"
-                    value="Yes"
+                    name="first_graduate"
+                    id="fgYes"
+                    value="true"
                     required />
-                  <label class="form-check-label" for="yes"> Yes </label>
+                  <label class="form-check-label" for="fgYes"> Yes </label>
                 </div>
                 <div class="form-check">
                   <input
                     class="form-check-input"
                     type="radio"
-                    name="firstGraduateInput"
-                    id="no"
-                    value="No"
+                    name="first_graduate"
+                    id="fgNo"
+                    value="false"
                     required />
-                  <label class="form-check-label" for="no"> No </label>
+                  <label class="form-check-label" for="fgNo"> No </label>
                 </div>
               </div>
             </div>
@@ -305,7 +340,11 @@
               <label for="addressLine1Input" class="form-label"
                 >Address Line1</label
               >
-              <input class="form-control" id="addressLine1Input" required />
+              <input
+                class="form-control"
+                name="address_line1"
+                id="addressLine1Input"
+                required />
               <div class="invalid-feedback">
                 Please enter your streetno/village/block.
               </div>
@@ -314,19 +353,31 @@
               <label for="addressLine2Input" class="form-label"
                 >Address Line2</label
               >
-              <input class="form-control" id="addressLine2Input" required />
+              <input
+                class="form-control"
+                name="address_line2"
+                id="addressLine2Input"
+                required />
               <div class="invalid-feedback">
                 Please enter your locality/panchayat/municipal.
               </div>
             </div>
             <div class="col-lg-6">
               <label for="districtInput" class="form-label">District</label>
-              <input class="form-control" id="districtInput" required />
+              <input
+                class="form-control"
+                id="districtInput"
+                name="city"
+                required />
               <div class="invalid-feedback">Please enter your district.</div>
             </div>
             <div class="col-lg-6">
               <label for="stateInput" class="form-label">State</label>
-              <input class="form-control" id="stateInput" required />
+              <input
+                class="form-control"
+                id="stateInput"
+                name="state"
+                required />
               <div class="invalid-feedback">Please enter your state.</div>
             </div>
             <div class="col-lg-12">
@@ -336,6 +387,7 @@
                   class="form-control"
                   id="pincodeInput"
                   pattern="[0-9]{6}"
+                  name="pincode"
                   required />
                 <div class="invalid-feedback">
                   Please enter your valid 6-digit zipcode/pincode.
@@ -349,7 +401,8 @@
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  id="isExtraCourseInput" />
+                  id="isExtraCourseInput"
+                  name="extra_course" />
                 <label class="form-check-label" for="isExtraCourseInput">
                   Have you attending any extra courses?
                 </label>
@@ -364,7 +417,8 @@
                 id="extraCourseDetailInput"
                 placeholder="Enter here"
                 rows="4"
-                required></textarea>
+                required
+                name="extra_course_details"></textarea>
               <div class="invalid-feedback">
                 Please enter a details about your extra courses.
               </div>
@@ -379,6 +433,7 @@
                 class="form-control"
                 id="intershipInput"
                 placeholder="Enter here"
+                name="internship"
                 rows="4"
                 required></textarea>
               <div class="invalid-feedback">
@@ -394,6 +449,7 @@
                 <input
                   class="form-control"
                   id="sem1Input"
+                  name="sem1"
                   pattern="[0-9]{2,3}"
                   required />
               </div>
@@ -401,6 +457,7 @@
                 <label for="sem2Input" class="form-label">SEM 2</label>
                 <input
                   class="form-control"
+                  name="sem2"
                   id="sem2Input"
                   pattern="[0-9]{2,3}"
                   required />
@@ -410,6 +467,7 @@
                 <input
                   class="form-control"
                   id="sem3Input"
+                  name="sem3"
                   pattern="[0-9]{2,3}"
                   required />
               </div>
@@ -418,6 +476,7 @@
                 <input
                   class="form-control"
                   id="sem4Input"
+                  name="sem4"
                   pattern="[0-9]{2,3}"
                   required />
               </div>
@@ -426,6 +485,7 @@
                 <input
                   class="form-control"
                   id="sem5Input"
+                  name="sem5"
                   pattern="[0-9]{2,3}"
                   required />
               </div>
@@ -435,6 +495,7 @@
                   class="form-control"
                   id="sem6Input"
                   pattern="[0-9]{2,3}"
+                  name="sem6"
                   required />
               </div>
             </div>
@@ -443,7 +504,8 @@
                 <input
                   class="form-check-input"
                   type="checkbox"
-                  id="isHigherEducationInput" />
+                  id="isHigherEducationInput"
+                  name="higher_education" />
                 <label class="form-check-label" for="isHigherEducationInput">
                   Have you registered for any higher education?
                 </label>
@@ -457,6 +519,7 @@
                 class="form-control"
                 id="higherEducationDetailInput"
                 placeholder="Enter here"
+                name="higher_education_details"
                 rows="2"
                 required></textarea>
               <div class="invalid-feedback">
@@ -471,6 +534,7 @@
               <textarea
                 class="form-control"
                 id="employementInput"
+                name="employment_details"
                 placeholder="Enter here"
                 rows="2"
                 required></textarea>
@@ -489,19 +553,132 @@
               >
             </div> -->
             <div class="col-12">
-              <button class="btn btn-primary" type="submit">Submit form</button>
+              <button
+                class="btn btn-secondary"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#cancel">
+                Cancel
+              </button>
+              <button class="btn btn-primary" type="submit">
+                Update Details
+              </button>
             </div>
           </form>
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="cancel"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    Any changes made will be lost. Are you sure you want to
+                    cancel?
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+                    cancel
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-dismiss="modal"
+                    onclick="onClickCancelBtn(event)">
+                    confirm
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>
     <!-- End #main -->
-    <script>
-      const getStudentDetails = async () => {};
-      // var selectedOption = document.querySelector('input[name="option"]:checked');
 
-      (function () {
-        "use strict";
+    <script>
+      // edit profile toggler
+      document
+        .getElementById("editProfileBtn")
+        .addEventListener("click", (e) => {
+          e.preventDefault();
+          disableFormInputs(false);
+        });
+
+      const disableFormInputs = (disableVal = true) => {
+        var inputs = document.querySelectorAll(
+          "form input, form select, form textarea, form button"
+        );
+        inputs.forEach(function (input) {
+          input.disabled = disableVal;
+        });
+      };
+      disableFormInputs(true);
+
+      const onClickCancelBtn = (e) => {
+        e.preventDefault();
+        disableFormInputs(true);
+      };
+
+      const setInitialFormValue = (initialFormValues) => {
+        document.getElementById("userNameEl").innerText =
+          initialFormValues.user_name;
+        let inputs = document.querySelectorAll(
+          "form input, form select, form textarea"
+        );
+        inputs.forEach(function (input) {
+          if (input.name.startsWith("sem")) {
+            input.value = initialFormValues.sem_detail.length
+              ? initialFormValues.sem_detail.find(
+                  (itm) => itm.sem === input.name[input.name.length - 1]
+                ).percentage
+              : "";
+          } else {
+            input.value = initialFormValues[input.name];
+          }
+        });
+      };
+
+      const fetchUserData = async () => {
+        const getJWtToken = localStorage.getItem("jwttoken");
+        const getUserId = localStorage.getItem("userId");
+        if (getJWtToken && getUserId) {
+          const getUserRes = await fetch(
+            "http://localhost:5000/api/admin/getByIdPerson/" + getUserId,
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          if (!getUserRes.ok) {
+            return alert("Failed to fetch user details");
+          }
+          const response = await getUserRes.json();
+          if (response.code == 200 && response.data.length) {
+            const initialFormData = response.data[0];
+            setInitialFormValue(initialFormData);
+          } else {
+            return alert("Failed to fetch user details");
+          }
+        }
+      };
+      fetchUserData();
+
+      const formHandling = () => {
         let form = document.querySelector(".needs-validation");
         let extraCourseInput = document.getElementById("isExtraCourseInput");
         let isHigherEdu = document.getElementById("isHigherEducationInput");
@@ -538,6 +715,7 @@
           function (event) {
             event.preventDefault();
             event.stopPropagation();
+            console.log(event, "--------");
             if (!form.checkValidity()) {
               form.classList.add("was-validated");
               return;
@@ -550,7 +728,8 @@
         // window.addEventListener("beforeunload", function (e) {
         //   e.preventDefault();
         // });
-      })();
+      };
+      formHandling();
     </script>
   </body>
 </html>
