@@ -1,31 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-    <link rel="stylesheet" href="assets/css/style2.css">
-    </head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Register</title>
+   <link rel="stylesheet" href="assets/css/style2.css">
+</head>
 
 
 <body>
-   
-<div class="form-container">
 
-   <form action="registeration.php" method="post" enctype="multipart/form-data">
-      <h3>register now</h3>
-      
-      <input type="text" name="name" placeholder="Enter username" class="box" required>
-      <input type="email" name="email" placeholder="Enter email" class="box" required>
-      <input type="password" name="password" placeholder="Enter password" class="box" required>
-      <input type="password" name="cpassword" placeholder="Confirm password" class="box" required>
-      <input type="submit" name="submit" value="Register now" class="btn">
-      <p>Already have an Account? <a href="login.html">Login Now</a></p>
-   </form>
+   <div class="form-container">
 
-</div>
+      <form onsubmit="submitForm(event)" enctype="multipart/form-data">
+         <h3>register now</h3>
+
+         <input type="text" name="name" placeholder="Enter username" class="box" required>
+         <input type="email" name="email" placeholder="Enter email" class="box" required>
+         <input type="password" name="password" pattern="[0-9@#$*A-Za-z]{8,}"
+            title="Password must be at least 8 characters long" placeholder="Enter password" class="box" required>
+         <input type="password" name="cpassword" pattern="[0-9@#$*A-Za-z]{8,}"
+            title="Confirm Password must be at least 8 characters long" placeholder="Confirm password" class="box"
+            required>
+         <div style="display: flex;gap: 10px;"><input type="checkbox" id="showPassword" />
+            <label for="showPassword">
+               Show Password
+            </label>
+         </div>
+         <input type="submit" name="submit" value="Register now" class="btn">
+
+         <p>Already have an Account? <a href="login.html">Login Now</a></p>
+      </form>
+
+   </div>
+
+   <script>
+      'use strict';
+      let showPassword = document.getElementById("showPassword");
+
+      showPassword.addEventListener("change", (event) => {
+         if (event.target.checked) {
+            document.querySelector('input[name="password"]').setAttribute('type', 'text');
+            document.querySelector('input[name="cpassword"]').setAttribute('type', 'text');
+         } else {
+            document.querySelector('input[name="password"]').setAttribute('type', 'password');
+            document.querySelector('input[name="cpassword"]').setAttribute('type', 'password');
+
+         }
+      });
+
+      const submitForm = async (event) => {
+         try {
+            event.preventDefault();
+            let formEventValues = event.target;
+
+             let postData = {
+               password: formEventValues['cpassword'].value,
+               email: formEventValues['email'].value,
+               user_name: formEventValues['name'].value
+            };
+
+            if(formEventValues['cpassword'].value!== formEventValues['password'].value){
+               alert("Both password and confirm password must be same!")
+               return;
+            }
+
+            const createUser = await fetch('http://localhost:5000/api/admin/createPerson', {
+               method: 'POST',
+               headers: {
+                  'Content-Type': 'application/json',
+               },
+               body: JSON.stringify(postData)
+            });
+            
+            if (!createUser.ok) {
+               return alert('Failed: Something went wrong');
+            }
+            const response = await createUser.json();
+
+            if (response.code == 201) {
+               alert('Student Created succesfully!')
+               window.location.href = 'login.html';
+            } else {
+               alert(response.message);
+            }
+         } catch (err) {
+            alert(err.message)
+         }
+
+      }
+   </script>
 
 </body>
+
 </html>
 </body>
+
 </html>

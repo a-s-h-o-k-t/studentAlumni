@@ -67,7 +67,7 @@
                 >
               </li>
               <li>
-                <a class="dropdown-item">
+                <a class="dropdown-item" id="logout">
                   <i class="bi bi-box-arrow-left"></i> Logout</a
                 >
               </li>
@@ -82,6 +82,26 @@
         <div
           class="border border-3 border border-2 p-4 m-4 d-flex flex-column overflow-auto">
           <form class="row g-3 needs-validation" novalidate>
+            <div class="col-lg-12 d-flex justify-content-center">
+              <img
+                src="assets/img/noimg.avif"
+                alt="profile_img"
+                class="profile-img shadow"
+                id="user_image" />
+            </div>
+            <div class="col-lg-12 d-flex justify-content-center">
+              <button
+                type="button"
+                class="btn btn-danger"
+                onclick="onClickChangePicture(event)">
+                Change picture
+              </button>
+              <input
+                type="file"
+                name="user_image"
+                id="imgfileInput"
+                style="display: none" />
+            </div>
             <div class="col-lg-6">
               <label for="studentNameInput" class="form-label"
                 >Student Name</label
@@ -243,10 +263,10 @@
                     class="form-check-input"
                     type="radio"
                     name="special_category"
-                    id="others"
-                    value="Others"
+                    id="None"
+                    value="None"
                     required />
-                  <label class="form-check-label" for="others"> Others </label>
+                  <label class="form-check-label" for="None"> None </label>
                 </div>
               </div>
             </div>
@@ -302,6 +322,16 @@
                   <label class="form-check-label" for="beediScholarship">
                     Beedi scholarship
                   </label>
+                </div>
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="scholarship"
+                    id="None"
+                    value="None"
+                    required />
+                  <label class="form-check-label" for="None"> None </label>
                 </div>
               </div>
             </div>
@@ -543,15 +573,6 @@
               </div>
             </div>
 
-            <!-- <div>
-              <input
-                type="checkbox"
-                class="form-check-input"
-                id="exampleCheck1" />
-              <label class="form-check-label" for="exampleCheck1"
-                >Check me out</label
-              >
-            </div> -->
             <div class="col-12">
               <button
                 class="btn btn-secondary"
@@ -596,7 +617,7 @@
                     type="button"
                     class="btn btn-primary"
                     data-bs-dismiss="modal"
-                    onclick="onClickCancelBtn(event)">
+                    onclick="onClickConfirmCancelBtn(event)">
                     confirm
                   </button>
                 </div>
@@ -609,6 +630,11 @@
     <!-- End #main -->
 
     <script>
+      //gloval var
+      const getJWtToken = localStorage.getItem("jwttoken");
+      const getUserId = localStorage.getItem("userId");
+      const formDataImage = new FormData();
+
       // edit profile toggler
       document
         .getElementById("editProfileBtn")
@@ -617,6 +643,15 @@
           disableFormInputs(false);
         });
 
+      // onclick logout
+      document.getElementById("logout").addEventListener("click", (e) => {
+        e.preventDefault();
+        localStorage.clear();
+        alert("user loggedout successfully!");
+        window.location.href = "index.html";
+      });
+
+      // disable all form inputs
       const disableFormInputs = (disableVal = true) => {
         var inputs = document.querySelectorAll(
           "form input, form select, form textarea, form button"
@@ -627,14 +662,17 @@
       };
       disableFormInputs(true);
 
-      const onClickCancelBtn = (e) => {
-        e.preventDefault();
-        disableFormInputs(true);
-      };
-
+      // set initial values to the form inputs
       const setInitialFormValue = (initialFormValues) => {
         document.getElementById("userNameEl").innerText =
           initialFormValues.user_name;
+
+        document.getElementById("user_image").src =
+          initialFormValues.user_image == "None" ||
+          !initialFormValues.user_image
+            ? "assets/img/noimg.avif"
+            : initialFormValues.user_image;
+
         let inputs = document.querySelectorAll(
           "form input, form select, form textarea"
         );
@@ -642,18 +680,34 @@
           if (input.name.startsWith("sem")) {
             input.value = initialFormValues.sem_detail.length
               ? initialFormValues.sem_detail.find(
-                  (itm) => itm.sem === input.name[input.name.length - 1]
+                  (itm) => itm.sem == input.name[input.name.length - 1]
                 ).percentage
               : "";
+          } else if (input.type == "radio") {
+            if (input.value == initialFormValues[input.name].toString()) {
+              input.checked = true;
+            }
+          } else if (input.type == "date") {
+            input.value = new Date(initialFormValues[input.name])
+              .toISOString()
+              .split("T")[0];
+          } else if (input.type == "file") {
+            return;
           } else {
             input.value = initialFormValues[input.name];
           }
         });
+        let checkboxes = document.querySelectorAll(
+          "input[type=checkbox][value=true]"
+        );
+        Array.from(checkboxes).map((checkbox) => {
+          checkbox.checked = true;
+          checkbox.dispatchEvent(new Event("change"));
+        });
       };
 
+      // fetch the user details
       const fetchUserData = async () => {
-        const getJWtToken = localStorage.getItem("jwttoken");
-        const getUserId = localStorage.getItem("userId");
         if (getJWtToken && getUserId) {
           const getUserRes = await fetch(
             "http://localhost:5000/api/admin/getByIdPerson/" + getUserId,
@@ -678,6 +732,111 @@
       };
       fetchUserData();
 
+      // update the user details
+      const updateUserDetails = async (formValues) => {
+        const { sem1, sem2, sem3, sem4, sem5, sem6, ...rest } = formValues;
+        let updatedData = {
+          ...rest,
+          sem_detail: [
+            {
+              sem: 1,
+              percentage: sem1,
+            },
+            {
+              sem: 2,
+              percentage: sem2,
+            },
+            {
+              sem: 3,
+              percentage: sem3,
+            },
+            {
+              sem: 4,
+              percentage: sem4,
+            },
+            {
+              sem: 5,
+              percentage: sem5,
+            },
+            {
+              sem: 6,
+              percentage: sem6,
+            },
+          ],
+        };
+
+        if (formDataImage.entries().next().value) {
+          const updateImage = await fetch(
+            "http://localhost:5000/api/admin/upload",
+            {
+              method: "POST",
+
+              body: formDataImage,
+            }
+          );
+          if (!updateImage.ok) {
+            return alert("Failed to update the image");
+          }
+          const response = await updateImage.json();
+          if (response.code == 201) {
+            updatedData = { ...updatedData, user_image: response.image_url };
+          }
+        }
+
+        const updateUser = await fetch(
+          "http://localhost:5000/api/admin/updatePerson/" + getUserId,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              authorization: `Bearer ${getJWtToken}`,
+            },
+            body: JSON.stringify(updatedData),
+          }
+        );
+        if (!updateUser.ok) {
+          return alert("Failed: Something went wrong");
+        }
+        const response = await updateUser.json();
+
+        if (response.code == 200) {
+          alert("User updated succesfully!");
+          fetchUserData();
+          disableFormInputs(true);
+        } else {
+          alert(response.message);
+        }
+      };
+
+      // click cancel button event
+      const onClickConfirmCancelBtn = (e) => {
+        e.preventDefault();
+        location.reload();
+      };
+
+      // click cancel button event
+      const onClickChangePicture = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        document.getElementById("imgfileInput").click();
+      };
+
+      document
+        .getElementById("imgfileInput")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              const img = document.getElementById("user_image");
+              img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+          }
+          formDataImage.append("fileName", file);
+        });
+
+      // handling the initial form views
       const formHandling = () => {
         let form = document.querySelector(".needs-validation");
         let extraCourseInput = document.getElementById("isExtraCourseInput");
@@ -710,26 +869,34 @@
           }
         });
 
+        // click Update details button event
         form.addEventListener(
           "submit",
           function (event) {
             event.preventDefault();
             event.stopPropagation();
-            console.log(event, "--------");
             if (!form.checkValidity()) {
               form.classList.add("was-validated");
               return;
             }
+            // Get form values
+            const formData = new FormData(this); // 'this' refers to the form element
+
+            // Convert formData to object
+            const formValues = {};
+            formData.forEach(function (value, key) {
+              formValues[key] = value;
+            });
             // api call form submission
+            updateUserDetails(formValues);
           },
           false
         );
-
-        // window.addEventListener("beforeunload", function (e) {
-        //   e.preventDefault();
-        // });
       };
       formHandling();
+      // window.addEventListener("beforeunload", function (e) {
+      //   e.preventDefault();
+      // });
     </script>
   </body>
 </html>

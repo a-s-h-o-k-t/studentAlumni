@@ -81,7 +81,7 @@
                 if (response.code == 200) {
                     localStorage.setItem("jwttoken", response?.token);
                     localStorage.setItem("userId", response.data[0].id);
-                    alert('LoggedIn succesfully')
+                    alert('User logged in succesfully!')
                     window.location.href = 'studentDetailsRegis.html?id=' + response.data[0].id;
                     window.location.replace('studentDetailsRegis.html?id=' + response.data[0].id)
                 } else {
